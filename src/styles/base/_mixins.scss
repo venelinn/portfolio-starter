@@ -1,0 +1,120 @@
+@mixin font-smoothing {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+@mixin ellipsis($width: false) {
+	@if $width {
+		width: $width;
+	}
+
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+@mixin arrow($width, $color, $direction, $showContent: true) {
+	@if $showContent {
+		content: '';
+	}
+
+	width: 0;
+	height: 0;
+	border: $width solid transparent;
+
+	@if $direction=="right" {
+		border-left-color: $color;
+	}
+
+	@if $direction=="left" {
+		border-right-color: $color;
+	}
+
+	@if $direction=="top" {
+		border-bottom-color: $color;
+	}
+
+	@if $direction=="bottom" {
+		border-top-color: $color;
+	}
+}
+
+@mixin disableClick {
+	pointer-events: none;
+	cursor: default;
+}
+
+@mixin enableClick {
+	pointer-events: auto;
+	cursor: pointer;
+}
+
+@function calculateRem($size) {
+	$remSize: $size / 16px;
+	@return $remSize * 1rem;
+}
+
+@mixin font-size($size) {
+	font-size: $size;
+	font-size: calculateRem($size);
+}
+
+@mixin calc($property, $expression) {
+	#{$property}: -webkit-calc(#{$expression});
+	#{$property}: calc(#{$expression});
+}
+
+// FONTS
+
+@mixin font-face($name, $path, $weight: null, $style: null, $exts: eot woff2 woff ttf svg) {
+	$src: null;
+	$src1: null;
+	$haseot: null;
+
+	$extmods: (
+		eot: "?#iefix",
+		svg: "#" + str-replace($name, " ", "_")
+	);
+
+	$formats: (
+		eot: "embedded-opentype",
+		otf: "opentype",
+		ttf: "truetype"
+	);
+
+	@each $ext in $exts {
+		$extmod: if(map-has-key($extmods, $ext), $ext + map-get($extmods, $ext), $ext);
+		$format: if(map-has-key($formats, $ext), map-get($formats, $ext), $ext);
+		@if $ext == "eot" {
+			$haseot: true;
+			$src1: append($src, url(quote($path + "." + $ext)));
+		}
+		$src: append($src, url(quote($path + "." + $extmod)) format(quote($format)), comma);
+	}
+
+	@if $haseot {
+		@font-face {
+			font-family: quote($name);
+			font-style: $style;
+			font-weight: $weight;
+			src: $src1;
+			src: $src;
+      font-display: optional;
+		}
+	} @else {
+		@font-face {
+			font-family: quote($name);
+			font-style: $style;
+			font-weight: $weight;
+			src: $src;
+      font-display: optional;
+		}
+	}
+}
+
+@mixin placeholder {
+  ::-webkit-input-placeholder {@content}
+  :-moz-placeholder           {@content}
+  ::-moz-placeholder          {@content}
+  :-ms-input-placeholder      {@content}
+}
