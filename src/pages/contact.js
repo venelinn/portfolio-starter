@@ -18,7 +18,7 @@ const Contact = ({ data, location }) => {
           <Box p={[3, 4]} width={[1]}>
             <article
               dangerouslySetInnerHTML={{
-                __html: contact.body.childMarkdownRemark.html,
+                __html: contact.body.childContentfulRichText.html,
               }}
             />
           </Box>

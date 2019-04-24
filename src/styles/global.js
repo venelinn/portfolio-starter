@@ -211,12 +211,8 @@ a {
 	font-size: 1.25em;
 	line-height: 1.6;
 	text-decoration: none;
-	color: var(--color-secondary);
-    text-shadow: .125em .125em var(--color-base);
-    transition: all 0.3s;
-	&: hover {
-		text-shadow: .125em .125em var(--color-base), .25em .25em var(--color-tertiary), .375em .375em var(--color-highlight), .5em .5em var(--color-accent);
-	}
+	color: inherit;
+  transition: all 0.3s;
 }
 
 a.invert {
@@ -362,6 +358,7 @@ a:focus {
 .headroom-wrapper {
 	position: relative;
 	z-index: 300;
+	color: #fff;
 }
 .button {
 	font-size: 1.25em;

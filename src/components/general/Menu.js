@@ -18,12 +18,6 @@ const StyledLink = styled(Link)`
   margin: 0;
   padding: 0.6em 0 0.5em;
   color: var(--color-base) !important;
-  text-shadow: 0.125em 0.125em var(--color-secondary) !important;
-  &:hover {
-    text-shadow: 0.125em 0.125em var(--color-secondary),
-      0.25em 0.25em var(--color-tertiary),
-      0.375em 0.375em var(--color-highlight), 0.5em 0.5em var(--color-accent) !important;
-  }
   @media screen and (min-width: 52em) {
     padding: 0.5em 0;
     color: var(--color-accent);
@@ -40,13 +34,7 @@ const MenuToggle = styled(Heading)`
   height: 3.5em;
   color: var(--color-base);
   cursor: pointer;
-  text-shadow: 0.125em 0.125em var(--color-secondary);
   transition: all 0.3s;
-  &: hover {
-    text-shadow: 0.125em 0.125em var(--color-secondary),
-      0.25em 0.25em var(--color-tertiary),
-      0.375em 0.375em var(--color-highlight), 0.5em 0.5em var(--color-accent);
-  }
 `
 
 const NavBar = styled.nav`
@@ -116,31 +104,6 @@ class Navigation extends React.Component {
             <StyledLink to="/contact">
               <Heading>Contact</Heading>
             </StyledLink>
-
-            <Box>
-              <a
-                href="https://www.contentful.com/"
-                rel="nofollow noopener noreferrer"
-                target="_blank"
-              >
-                <img
-                  src="https://images.ctfassets.net/fo9twyrwpveg/7Htleo27dKYua8gio8UEUy/0797152a2d2f8e41db49ecbf1ccffdaa/PoweredByContentful_DarkBackground_MonochromeLogo.svg"
-                  style={{ width: '100px' }}
-                  alt="Powered by Contentful"
-                />
-              </a>
-              <a
-                href="https://www.netlify.com"
-                rel="nofollow noopener noreferrer"
-                target="_blank"
-              >
-                <img
-                  src="https://cdn.netlify.com/1ed63b33731af09d707f4ecad8e805df905104ec/9f1a1/img/press/logos/full-logo-dark-simple.svg"
-                  style={{ width: '100px' }}
-                  alt="Netlify"
-                />
-              </a>
-            </Box>
           </Menu>
         </NavBar>
         <MenuTabBar justifyContent="space-evenly">

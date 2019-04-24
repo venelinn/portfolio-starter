@@ -23,10 +23,7 @@ const GalleryHead = props => {
       >
         <Box>
           <Link to={`/`} className="noUnderline">
-            <Heading
-              color="var(--color-base)"
-              css={{ display: 'inline-block' }}
-            >
+            <Heading>
               ⬅ Back
             </Heading>
           </Link>
@@ -42,19 +39,6 @@ const GalleryHead = props => {
             __html: props.body.childMarkdownRemark.html,
           }}
         />
-        <Flex
-          width={[1]}
-          flexWrap="wrap"
-          alignContent="center"
-          flexDirection="row"
-        >
-          {props.tags.map(tag => (
-            <Box key={tag.id} mr={2} mb={2} className="tag noLinkAccent">
-              <Link to={`/tag/${tag.slug}/`}>
-              </Link>
-            </Box>
-          ))}
-        </Flex>
       </Flex>
     </Headroom>
   )

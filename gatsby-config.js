@@ -5,6 +5,7 @@ require('dotenv').config();
 let env = process.env.NODE_ENV || 'development';
 require('dotenv').config({path: `./.env.${env}`});
 
+
 module.exports = {
   siteMetadata: {
     siteUrl: config.siteUrl,
@@ -100,6 +101,15 @@ module.exports = {
       options: {
         color: config.themeColor,
       },
+    },
+    {
+      resolve: `gatsby-source-google-photos`,
+      options: {
+        clientId: `${process.env.GOOGLE_CLIENT_ID}`,
+        clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
+        albums: ['Camp de jour - semaine 2', 'Fete de ABBA']
+        // if you only have one album pass it as an array
+      }
     },
     {
       resolve: 'gatsby-source-contentful',
