@@ -3,12 +3,16 @@ import { graphql } from 'gatsby'
 import Layout from './../components/general/Layout'
 import Hero from './../components/general/Hero'
 import HomeList from './../components/home/homeList'
+import BlogLists from './../components/blog/blogList'
+
+import { Flex, Box } from 'rebass'
 
 import SEO from './../components/general/SEO'
 
 const Index = ({ data, location }) => {
   const home = data.contentfulHome
   const galleries = data.allContentfulExtendedGallery.edges
+  const posts = data.allContentfulPost.edges
 
   return (
     <Layout location={location}>
@@ -22,7 +26,7 @@ const Index = ({ data, location }) => {
             __html: home.body.childMarkdownRemark.html,
           }}
         />
-        <div>
+        <Flex flexWrap="wrap" mb={[5, 0]} className="changeDirection">
           {galleries.map(({ node: gallery }) => (
             <HomeList
               key={gallery.id}
@@ -33,7 +37,21 @@ const Index = ({ data, location }) => {
               excerpt={gallery.body}
             />
           ))}
-        </div>
+        </Flex>
+        <Flex flexWrap="wrap" mb={[5, 0]} flexWrap="wrap">
+          {posts.map(({ node: post }) => (
+            <BlogLists
+              key={post.id}
+              slug={post.slug}
+              image={post.heroImage}
+              title={post.title}
+              date={post.publishDate}
+              time={post.body.childContentfulRichText.timeToRead}
+              excerpt={post.metaDescription.childMarkdownRemark.rawMarkdownBody}
+              grid={[1/5]}
+            />
+          ))}
+        </Flex>
       </div>
     </Layout>
   )
@@ -42,7 +60,7 @@ const Index = ({ data, location }) => {
 export const query = graphql`
   query Index {
     allContentfulExtendedGallery(
-      limit: 1000
+      limit: 3
       sort: { fields: [publishDate], order: DESC }
     ) {
       edges {
@@ -53,13 +71,43 @@ export const query = graphql`
           publishDate(formatString: "DD MMM YYYY h:mm a")
           heroImage {
             title
-            fluid(maxWidth: 1000, quality: 65) {
+            fluid(maxWidth: 500, quality: 65) {
               ...GatsbyContentfulFluid_withWebp
             }
           }
           body {
             childMarkdownRemark {
               excerpt(pruneLength: 140)
+            }
+          }
+        }
+      }
+    }
+    allContentfulPost(
+      limit: 3
+      sort: { fields: [publishDate], order: DESC }
+    ) {
+      edges {
+        node {
+          title
+          id
+          slug
+          publishDate(formatString: "DD MMM YYYY")
+          heroImage {
+            title
+            fluid(maxWidth: 500, quality: 65) {
+              ...GatsbyContentfulFluid_withWebp
+            }
+          }
+          body {
+            childContentfulRichText {
+              timeToRead
+            }
+          }
+          metaDescription {
+            childMarkdownRemark {
+              rawMarkdownBody
+              timeToRead
             }
           }
         }

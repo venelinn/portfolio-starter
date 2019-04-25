@@ -103,15 +103,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-google-photos`,
-      options: {
-        clientId: `${process.env.GOOGLE_CLIENT_ID}`,
-        clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
-        albums: ['Camp de jour - semaine 2', 'Fete de ABBA']
-        // if you only have one album pass it as an array
-      }
-    },
-    {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: `${process.env.CONTENTFUL_SPACE_ID}`,

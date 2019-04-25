@@ -28,13 +28,12 @@ const GalleryHead = props => {
             </Heading>
           </Link>
         </Box>
-        <Heading color="var(--color-base)" fontSize={5}>
+        <Heading fontSize={5}>
           {props.title}
         </Heading>
         <Text
           fontSize={2}
           pb={4}
-          color="var(--color-base)"
           dangerouslySetInnerHTML={{
             __html: props.body.childMarkdownRemark.html,
           }}

@@ -37,32 +37,8 @@ const MenuToggle = styled(Heading)`
   transition: all 0.3s;
 `
 
-const NavBar = styled.nav`
-  display: none;
-  @media screen and (min-width: 52em) {
-    display: block;
-  }
-`
 
-export const MenuTabBar = styled(Base)`
-  background: var(--color-secondary);
-  border-top: 3px solid var(--color-tertiary);
-  overflow: hidden;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 100;
-  display: flex;
-  @media screen and (min-width: 52em) {
-    display: none;
-  }
-  div {
-    border-right: 2px solid var(--color-tertiary);
-    &:last-child {
-      border-right: 0px solid var(--color-tertiary);
-    }
-  }
-`
+
 
 class Navigation extends React.Component {
   constructor(props) {
@@ -85,7 +61,7 @@ class Navigation extends React.Component {
     return (
       <>
         <Logo />
-        <NavBar>
+        <div>
           <MenuToggle onClick={() => this.toggleMenu()}>MENU</MenuToggle>
           <Menu
             right
@@ -105,42 +81,7 @@ class Navigation extends React.Component {
               <Heading>Contact</Heading>
             </StyledLink>
           </Menu>
-        </NavBar>
-        <MenuTabBar justifyContent="space-evenly">
-          <Box width={1 / 3}>
-            <StyledLink
-              to="/"
-              className="MenuTabBarHover"
-              activeStyle={{
-                boxShadow: 'inset 0 4px 0px 0px var(--color-highlight)',
-              }}
-            >
-              <FiHome size={'2em'} color={'var(--color-tertiary)'} />
-            </StyledLink>
-          </Box>
-          <Box width={1 / 3}>
-            <StyledLink
-              to="/blog"
-              className="MenuTabBarHover"
-              activeStyle={{
-                boxShadow: 'inset 0 4px 0px 0px var(--color-highlight)',
-              }}
-            >
-              <FiBook size={'2em'} color={'var(--color-tertiary)'} />
-            </StyledLink>
-          </Box>
-          <Box width={1 / 3}>
-            <StyledLink
-              to="/contact"
-              className="MenuTabBarHover"
-              activeStyle={{
-                boxShadow: 'inset 0 4px 0px 0px var(--color-highlight)',
-              }}
-            >
-              <FiUser size={'2em'} color={'var(--color-tertiary)'} />
-            </StyledLink>
-          </Box>
-        </MenuTabBar>
+        </div>
       </>
     )
   }

@@ -18,33 +18,31 @@ const MainBlog = ({ data, location }) => {
         image={blog.shareImage}
         description="A sporadic collection of thoughts mostly about the web"
       />
-      <Flex flexWrap="wrap" mb={[5, 0]} className="changeDirection">
-        <Box p={[3, 4]} width={[1, 1, 1 / 2, 1 / 3]}>
-          <Box p={[3, 4]} width={[1]}>
-            <article
-              dangerouslySetInnerHTML={{
-                __html: blog.body.childContentfulRichText.html,
-              }}
-            />
+      <div>
+        <Box width={[1]}>
+          <Box p={0} width={[1]}>
+            <Hero image={blog.heroImage} />
           </Box>
-          <Flex width={[1]} flexWrap="wrap" flexDirection="row">
-            {posts.map(({ node: post }) => (
-              <BlogLists
-                key={post.id}
-                slug={post.slug}
-                image={post.heroImage}
-                title={post.title}
-                date={post.publishDate}
-                time={post.body.childContentfulRichText.timeToRead}
-                excerpt={post.metaDescription.childMarkdownRemark.rawMarkdownBody}
-              />
-            ))}
-          </Flex>
+          <article
+            dangerouslySetInnerHTML={{
+              __html: blog.body.childContentfulRichText.html,
+            }}
+          />
         </Box>
-        <Box p={0} className="hide" width={[1, 1, 1 / 2, 2 / 3]}>
-          <Hero image={blog.heroImage} />
-        </Box>
-      </Flex>
+        <Flex width={[1]} flexWrap="wrap" flexDirection="row">
+          {posts.map(({ node: post }) => (
+            <BlogLists
+              key={post.id}
+              slug={post.slug}
+              image={post.heroImage}
+              title={post.title}
+              date={post.publishDate}
+              time={post.body.childContentfulRichText.timeToRead}
+              excerpt={post.metaDescription.childMarkdownRemark.rawMarkdownBody}
+            />
+          ))}
+        </Flex>
+      </div>
     </Layout>
   )
 }
