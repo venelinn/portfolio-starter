@@ -3,11 +3,11 @@ import Link from 'gatsby-link'
 import styled from 'styled-components'
 import { stack as Menu } from 'react-burger-menu'
 
-import { FiHome, FiBook, FiUser } from 'react-icons/fi'
+//import { FiHome, FiBook, FiUser } from 'react-icons/fi'
 
 import Logo from '../general/Logo'
 
-import { Flex as Base, Heading, Box } from 'rebass'
+import { Heading } from 'rebass'
 
 const StyledLink = styled(Link)`
   text-decoration: none;

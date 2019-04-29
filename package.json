@@ -53,6 +53,7 @@
     "react-icons": "^3.5.0",
     "react-images": "next",
     "react-pose": "^4.0.8",
+    "react-spring": "^8.0.19",
     "react-typography": "^0.16.19",
     "rebass": "^3.1.0",
     "styled-components": "^4.2.0",

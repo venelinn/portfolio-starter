@@ -1,10 +1,19 @@
-// @flow
-
 import React, { useState } from 'react'
 import Img from 'gatsby-image'
+import styled from 'styled-components'
 import { chunk, sum } from 'lodash'
 import { Box, Link, Heading } from 'rebass'
+import { config, animated, useTrail, useSpring } from 'react-spring'
 import Carousel, { Modal, ModalGateway } from 'react-images'
+
+
+const Item = styled(animated.a)`
+  position: relative;
+  overflow: hidden;
+  > div img {
+    transition: all 0.3s ease 0s !important;
+  }
+`
 
 type Props = {
   images: {
@@ -33,12 +42,34 @@ const Gallery = ({
         sum(rowAspectRatios)
       )
   )
+  const x = useSpring({
+    config: {
+      mass: 1,
+      tension: 500,
+      friction: 200
+    },
+    opacity: 0,
+    x: 0,
+    width: 400,
+    from: { opacity: 0, x: 20, width: 0  },
+  })
+  console.log(ef);
+
+  const trail = useTrail(images.length, {
+    config: {
+      mass: 1,
+      tension: 210,
+      friction: 23,
+    },
+    from: { opacity: 0  },
+    to: { opacity: 1},
+  })
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [modalCurrentIndex, setModalCurrentIndex] = useState(0)
 
   const closeModal = () => setModalIsOpen(false)
-  const openModal = (imageIndex: number) => {
+    const openModal = (imageIndex: number) => {
     setModalCurrentIndex(imageIndex)
     setModalIsOpen(true)
   }
@@ -48,28 +79,42 @@ const Gallery = ({
       p={[4, 5]}
       mb={[5, 5]}
     >
-      <Heading key={title}>{title}</Heading>
-      {images.map((image, i) => (
-        <Link key={image.id} onClick={() => openModal(i)}>
-          <Box
-            as={Img}
-            key={image.id}
-            fluid={image.thumbnail}
-            title={image.title}
-            width={rowAspectRatioSumsByBreakpoints.map(
-              (rowAspectRatioSums, j) => {
-                const rowIndex = Math.floor(i / itemsPerRowByBreakpoints[j])
-                const rowAspectRatioSum = rowAspectRatioSums[rowIndex]
-                return `${(image.fluid.aspectRatio / rowAspectRatioSum) * 100}%`
-              }
-            )}
-            css={`
-              display: inline-block;
-              vertical-align: middle;
-            `}
-          />
-        </Link>
-      ))}
+      <animated.div
+        style={{
+          transform: ef.interpolate(x => `translate3d(0, 0, ${ef.x}px)`)
+        }}>
+
+      </animated.div>
+
+      {trail.map((style, i) => {
+          // Grab everything before the first hashtag (because I write my captions like that)
+          const image = images[i]
+
+          return (
+            <Link key={i} onClick={() =>  openModal(i)}>
+              <Item style={style}>
+              <Box
+                as={Img}
+                key={image.id}
+                fluid={image.thumbnail}
+                title={image.title}
+                width={rowAspectRatioSumsByBreakpoints.map(
+                  (rowAspectRatioSums, j) => {
+                    const rowIndex = Math.floor(i / itemsPerRowByBreakpoints[j])
+                    const rowAspectRatioSum = rowAspectRatioSums[rowIndex]
+                    return `${(image.fluid.aspectRatio / rowAspectRatioSum) * 100}%`
+                  }
+                )}
+                css={`
+                  display: inline-block;
+                  vertical-align: middle;
+                `}
+              />
+
+              </Item>
+            </Link>
+          )
+        })}
       {ModalGateway && (
         <ModalGateway>
           {modalIsOpen && (

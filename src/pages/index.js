@@ -5,7 +5,7 @@ import Hero from './../components/general/Hero'
 import HomeList from './../components/home/homeList'
 import BlogLists from './../components/blog/blogList'
 
-import { Flex, Box } from 'rebass'
+import { Flex } from 'rebass'
 
 import SEO from './../components/general/SEO'
 
@@ -38,7 +38,7 @@ const Index = ({ data, location }) => {
             />
           ))}
         </Flex>
-        <Flex flexWrap="wrap" mb={[5, 0]} flexWrap="wrap">
+        <Flex flexWrap="wrap" mb={[5, 0]}>
           {posts.map(({ node: post }) => (
             <BlogLists
               key={post.id}
@@ -61,7 +61,7 @@ export const query = graphql`
   query Index {
     allContentfulExtendedGallery(
       limit: 3
-      sort: { fields: [publishDate], order: DESC }
+      sort: { fields: [publishDate], order: ASC }
     ) {
       edges {
         node {

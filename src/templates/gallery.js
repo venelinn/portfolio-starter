@@ -35,7 +35,9 @@ const GalleryTemplate = ({ data, location }) => {
 
 export const query = graphql`
   query($slug: String!) {
-    contentfulExtendedGallery(slug: { eq: $slug }) {
+    contentfulExtendedGallery(
+      slug: { eq: $slug }
+      ) {
       title
       id
       slug
