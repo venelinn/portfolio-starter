@@ -17,7 +17,7 @@ Portfolio site built using Gatsby + Contentful + Netlify. Features photography g
 - Progressive Web app with custom app icon
 - Offline support
 - Dark mode
-
+- [Localization](https://github.com/mccrodp/gatsby-starter-contentful-i18n)
 ##### Notes
 
 > This code can be used as a reference for other Gatsby projects, but will not work out-of-the-box without replicating the data structure in Contentful.

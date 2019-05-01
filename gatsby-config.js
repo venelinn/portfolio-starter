@@ -1,4 +1,5 @@
 const config = require('./src/utils/siteConfig')
+const languages = require('./src/data/languages');
 
 const path = require(`path`)
 require('dotenv').config();
@@ -9,6 +10,7 @@ require('dotenv').config({path: `./.env.${env}`});
 module.exports = {
   siteMetadata: {
     siteUrl: config.siteUrl,
+    languages,
     rssMetadata: {
       site_url: config.siteUrl,
       title: config.siteTitle,
@@ -101,6 +103,14 @@ module.exports = {
       options: {
         color: config.themeColor,
       },
+    },
+    {
+      resolve: 'gatsby-plugin-i18n',
+      options: {
+        langKeyForNull: 'any',
+        langKeyDefault: languages.defaultLangKey,
+        useLangKeyLayout: false
+      }
     },
     {
       resolve: 'gatsby-source-contentful',

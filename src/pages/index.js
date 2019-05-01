@@ -59,6 +59,14 @@ const Index = ({ data, location }) => {
 
 export const query = graphql`
   query Index {
+    site{
+      siteMetadata{
+        languages {
+          defaultLangKey
+          langs
+        }
+      }
+    }
     allContentfulExtendedGallery(
       limit: 3
       sort: { fields: [publishDate], order: ASC }
@@ -140,6 +148,7 @@ export const query = graphql`
         }
       }
     }
+
   }
 `
 

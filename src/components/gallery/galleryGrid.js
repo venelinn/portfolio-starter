@@ -3,7 +3,7 @@ import Img from 'gatsby-image'
 import styled from 'styled-components'
 import { chunk, sum } from 'lodash'
 import { Box, Link, Heading } from 'rebass'
-import { config, animated, useTrail, useSpring } from 'react-spring'
+import { animated, useTrail } from 'react-spring'
 import Carousel, { Modal, ModalGateway } from 'react-images'
 
 
@@ -42,18 +42,7 @@ const Gallery = ({
         sum(rowAspectRatios)
       )
   )
-  const x = useSpring({
-    config: {
-      mass: 1,
-      tension: 500,
-      friction: 200
-    },
-    opacity: 0,
-    x: 0,
-    width: 400,
-    from: { opacity: 0, x: 20, width: 0  },
-  })
-  console.log(ef);
+
 
   const trail = useTrail(images.length, {
     config: {
@@ -79,12 +68,7 @@ const Gallery = ({
       p={[4, 5]}
       mb={[5, 5]}
     >
-      <animated.div
-        style={{
-          transform: ef.interpolate(x => `translate3d(0, 0, ${ef.x}px)`)
-        }}>
-
-      </animated.div>
+      <Heading key={title}>{title}</Heading>
 
       {trail.map((style, i) => {
           // Grab everything before the first hashtag (because I write my captions like that)

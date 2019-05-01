@@ -2,10 +2,22 @@ import React from 'react'
 import { ThemeProvider } from 'styled-components'
 import posed, { PoseGroup } from 'react-pose'
 import Helmet from 'react-helmet'
+import { getCurrentLangKey, getLangs, getUrlForLang } from 'ptz-i18n';
+import { IntlProvider, addLocaleData } from 'react-intl';
+import 'intl';
+
 import theme from '../../styles/theme'
 import GlobalStyle from '../../styles/global'
 import Menu from '../general/Menu'
 import { pageFade } from '../../styles/pose'
+
+import en from 'react-intl/locale-data/en';
+import 'intl/locale-data/jsonp/en';
+import fr from 'react-intl/locale-data/fr';
+import 'intl/locale-data/jsonp/fr';
+
+// add concatenated locale data
+addLocaleData([...en, ...fr]);
 
 const Main = posed('main')(pageFade)
 
