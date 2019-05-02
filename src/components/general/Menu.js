@@ -2,6 +2,8 @@ import React from 'react'
 import Link from 'gatsby-link'
 import styled from 'styled-components'
 import { stack as Menu } from 'react-burger-menu'
+import SelectLanguage from './SelectLanguage';
+
 
 //import { FiHome, FiBook, FiUser } from 'react-icons/fi'
 
@@ -81,6 +83,7 @@ class Navigation extends React.Component {
               <Heading>Contact</Heading>
             </StyledLink>
           </Menu>
+          {/* <SelectLanguage langs={this.props.langs} /> */}
         </div>
       </>
     )

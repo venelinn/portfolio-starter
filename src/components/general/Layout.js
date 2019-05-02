@@ -21,6 +21,7 @@ addLocaleData([...en, ...fr]);
 
 const Main = posed('main')(pageFade)
 
+
 const Layout = ({ children, ...props }) => {
   return (
     <ThemeProvider theme={theme}>
